@@ -6,6 +6,7 @@
     "scripts": {
         "dev": "tsx watch src/index.ts",
         "build": "tsc",
+        "build:client": "npm run build",
         "start": "node dist/index.js",
         "seed": "tsx src/scripts/seedDatabase.ts",
         "sync:product-images": "tsx src/scripts/syncProductCloudinaryImages.ts",
