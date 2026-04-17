@@ -510,8 +510,8 @@
   color: #0f172a !important;
 }
 
-:root[data-theme='dark'] .ttdn-admin-app p:not(.text-white):not(.text-white-50),
-:root[data-theme='dark'] .ttdn-admin-app small:not(.text-white):not(.text-white-50),
+:root[data-theme='dark'] .ttdn-admin-app p,
+:root[data-theme='dark'] .ttdn-admin-app small,
 :root[data-theme='dark'] .ttdn-admin-app .text-muted,
 :root[data-theme='dark'] .ttdn-admin-app .ttdn-admin-helper-text {
   color: #64748b !important;

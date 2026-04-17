@@ -27,13 +27,13 @@
     font-family: iconly;
     font-style: normal;
     font-weight: normal;
-    src: url("../fonts/Iconly-Broken.eot");
-    src: url("../fonts/Iconly-Broken.eot?#iefix") format("embedded-opentype"),
+    src: url("/fastkart/assets/fonts/Iconly-light.eot");
+    src: url("/fastkart/assets/fonts/Iconly-light.eot?#iefix") format("embedded-opentype"),
         /* IE6-8 */
-        url("../fonts/Iconly-Broken.woff") format("woff"),
+        url("/fastkart/assets/fonts/Iconly-light.woff") format("woff"),
         /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-        url("../fonts/Iconly-Broken.ttf") format("truetype"),
-        url("../fonts/Iconly-Broken.svg#Iconly-Broken") format("svg");
+        url("/fastkart/assets/fonts/Iconly-light.ttf") format("truetype"),
+        url("/fastkart/assets/fonts/Iconly-light.svg#Iconly-light") format("svg");
 }
 
 @font-face {
@@ -53,13 +53,13 @@
     font-family: iconly;
     font-style: normal;
     font-weight: 900;
-    src: url("../fonts/Iconly-bulk.eot");
-    src: url("../fonts/Iconly-bulk.eot?#iefix") format("embedded-opentype"),
+    src: url("/fastkart/assets/fonts/Iconly-Bold.eot");
+    src: url("/fastkart/assets/fonts/Iconly-Bold.eot?#iefix") format("embedded-opentype"),
         /* IE6-8 */
-        url("../fonts/Iconly-bulk.woff") format("woff"),
+        url("/fastkart/assets/fonts/Iconly-Bold.woff") format("woff"),
         /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-        url("../fonts/Iconly-bulk.ttf") format("truetype"),
-        url("../fonts/Iconly-bulk.svg#Iconly-bulk") format("svg");
+        url("/fastkart/assets/fonts/Iconly-Bold.ttf") format("truetype"),
+        url("/fastkart/assets/fonts/Iconly-Bold.svg#Iconly-Bold") format("svg");
 }
 
 [class^="iconly-"],
