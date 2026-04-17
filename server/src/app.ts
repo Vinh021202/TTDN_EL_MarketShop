@@ -18,19 +18,31 @@ import chatRoutes from './routes/chat.routes.js';
 
 const app = express();
 
-const allowedOrigins = new Set(
-    [process.env.CLIENT_URL, 'http://localhost:5173']
-        .filter(Boolean)
-        .flatMap((origin) => origin!.split(','))
-        .map((origin) => origin.trim())
-        .filter(Boolean)
-);
+const configuredOriginPatterns = [process.env.CLIENT_URL, 'http://localhost:5173']
+    .filter(Boolean)
+    .flatMap((origin) => origin!.split(','))
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+
+const escapeRegex = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+const allowedOriginMatchers = configuredOriginPatterns.map((pattern) => {
+    if (!pattern.includes('*')) {
+        return { pattern, test: (origin: string) => origin === pattern };
+    }
+
+    const regex = new RegExp(`^${pattern.split('*').map(escapeRegex).join('.*')}$`);
+    return { pattern, test: (origin: string) => regex.test(origin) };
+});
+
+const isAllowedOrigin = (origin: string) =>
+    allowedOriginMatchers.some((matcher) => matcher.test(origin));
 
 app.use(helmet());
 app.use(
     cors({
         origin: (origin, callback) => {
-            if (!origin || allowedOrigins.size === 0 || allowedOrigins.has(origin)) {
+            if (!origin || allowedOriginMatchers.length === 0 || isAllowedOrigin(origin)) {
                 callback(null, true);
                 return;
             }
