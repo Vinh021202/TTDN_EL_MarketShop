@@ -1,4 +1,3 @@
-import axios from 'axios';
 import crypto from 'crypto';
 
 // ═══════════════════════════════════════════════════════════════
@@ -76,26 +75,41 @@ export async function createPaymentSession(
         const signature = generateSignature(payload);
 
         // Make API request
-        const response = await axios.post(
+        const response = await fetch(
             `${SEPAY_CONFIG.apiUrl}/checkout/init`,
-            payload,
             {
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-Signature': signature,
                 },
+                body: JSON.stringify(payload),
             }
         );
 
+        if (!response.ok) {
+            const errorData = (await response.json().catch(() => null)) as
+                | { message?: string }
+                | null;
+
+            return {
+                success: false,
+                error: errorData?.message || 'Payment session creation failed',
+            };
+        }
+
+        const data = (await response.json()) as PaymentResponse['data'];
+
         return {
             success: true,
-            data: response.data,
+            data,
         };
-    } catch (error: any) {
-        console.error('SePay create payment error:', error.response?.data || error.message);
+    } catch (error: unknown) {
+        const message = error instanceof Error ? error.message : 'Payment session creation failed';
+        console.error('SePay create payment error:', message);
         return {
             success: false,
-            error: error.response?.data?.message || 'Payment session creation failed',
+            error: message,
         };
     }
 }
